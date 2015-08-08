@@ -1,5 +1,7 @@
 package com.kael.surf.web.model;
 
+import java.util.List;
+
 public class Course {
 
 	private int id;
@@ -10,6 +12,7 @@ public class Course {
 	private String levelDesc;
 	private int duration;//minutes;
 	private String decsr;
+	private List<Chapter> chapterList;
 	
 	public int getId() {
 		return id;
@@ -58,6 +61,12 @@ public class Course {
 	}
 	public void setDecsr(String decsr) {
 		this.decsr = decsr;
+	}
+	public List<Chapter> getChapterList() {
+		return chapterList;
+	}
+	public void setChapterList(List<Chapter> chapterList) {
+		this.chapterList = chapterList;
 	}
 	
 }

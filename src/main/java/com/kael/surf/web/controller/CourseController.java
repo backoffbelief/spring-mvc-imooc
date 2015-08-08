@@ -1,7 +1,11 @@
 package com.kael.surf.web.controller;
 
 import java.util.Map;
+import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,12 +31,32 @@ public class CourseController {
 		return "course_view";
 	}
 	// restful /course/view2/{courseId}
-	@RequestMapping(value="/view2{courseId}",method=RequestMethod.GET)
+	@RequestMapping(value="/view2/{courseId}",method=RequestMethod.GET)
 	public String viewCourse2(@PathVariable("id")int id, Map<String, Object> modelMap){
 		Course course = courseService.getCourseByCid(id);
 		modelMap.put("course", course);
 		return "course_view";
 	}
+	//  /course/view3?courseId=456
+	@RequestMapping(value="/view2{courseId}",method=RequestMethod.GET)
+	public String viewCourse3(HttpServletRequest request){
+		Course course = courseService.getCourseByCid(Integer.parseInt(request.getParameter("courseId")));
+		request.setAttribute("course", course);
+		return "course_view";
+	}
 	
-	public String viewCourse3(Httpse)
+	@RequestMapping(value="/admin" ,method= RequestMethod.GET,params="add")
+	public String createCourse(){
+		return "edit";
+		
+	}
+	
+	@RequestMapping(value="/save" ,method= RequestMethod.POST)
+	public String saveCourse(Course course){
+		course.setId(new Random().nextInt(1000));
+		System.out.println(ReflectionToStringBuilder.toString(course));
+		return "redirect:view2/"+course.getId();
+		
+	}
+	
 }
