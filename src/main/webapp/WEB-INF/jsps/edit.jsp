@@ -8,13 +8,15 @@
 </head>
 <body>
 
-<form action="/hello/save" method="post">
-title<input type="text" name="title"><br/>
-title<input type="text" name="title"><br/>
-title<input type="text" name="title"><br/>
-title<input type="text" name="title"><br/>
-title<input type="text" name="title"><br/>
-title<input type="text" name="title"><br/>
+<form action="/course/save" method="post">
+title:<input type="text" name="title"><br/>
+imgPath<input type="text" name="imgPath" hidden="hidden" value="/static/imgs/course-img.jpg"><br/>
+learningNum:<input type="text" name="learningNum"><br/>
+level:<input type="text" name=level><br/>
+levelDesc:<input type="text" name="levelDesc"><br/>
+duration:<input type="text" name="duration"><br/>
+decsr:<input type="text" name="decsr"><br/>
+<input type="submit" name="btn" id="btn" value="save"><br/>
 </form>
 
 </body>

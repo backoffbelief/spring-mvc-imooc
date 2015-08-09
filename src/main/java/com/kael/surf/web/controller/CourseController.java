@@ -38,7 +38,7 @@ public class CourseController {
 		return "course_view";
 	}
 	//  /course/view3?courseId=456
-	@RequestMapping(value="/view2{courseId}",method=RequestMethod.GET)
+	@RequestMapping(value="/view3/{courseId}",method=RequestMethod.GET)
 	public String viewCourse3(HttpServletRequest request){
 		Course course = courseService.getCourseByCid(Integer.parseInt(request.getParameter("courseId")));
 		request.setAttribute("course", course);
@@ -55,7 +55,7 @@ public class CourseController {
 	public String saveCourse(Course course){
 		course.setId(new Random().nextInt(1000));
 		System.out.println(ReflectionToStringBuilder.toString(course));
-		return "redirect:view2/"+course.getId();
+		return "redirect:view/id="+course.getId();
 		
 	}
 	
