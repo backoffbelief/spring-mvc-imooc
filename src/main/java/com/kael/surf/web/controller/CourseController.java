@@ -1,10 +1,13 @@
 package com.kael.surf.web.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kael.surf.web.model.Course;
 import com.kael.surf.web.service.CourseService;
@@ -56,7 +60,18 @@ public class CourseController {
 		course.setId(new Random().nextInt(1000));
 		System.out.println(ReflectionToStringBuilder.toString(course));
 		return "redirect:view/id="+course.getId();
-		
 	}
 	
+	@RequestMapping(value="/file",method= RequestMethod.GET)
+	public String upload(){
+		return "file";
+	}
+	
+	@RequestMapping(value="/doUpload",method= RequestMethod.POST)
+	public String doUpload(@RequestParam("file")MultipartFile file) throws IOException{
+		if(!file.isEmpty()){
+			FileUtils.copyInputStreamToFile(file.getInputStream(), new File("c:\\temp\\immoc\\",System.currentTimeMillis()+file.getOriginalFilename()));
+		}
+		return "success";
+	}
 }
